@@ -8,6 +8,8 @@ var path = require('path');
 var models = require('./models');
 var chalk = require('chalk');
 var wikiRouter = require('./routes/wiki.js');
+var userRouter = require('./routes/user.js');
+
 
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
@@ -20,18 +22,19 @@ app.use(parser.json());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/wiki', wikiRouter);
+app.use('/users', userRouter);
 
 app.get('/', function(req, res, next) {
-	res.render('index.html');
+	res.redirect('/wiki');
 })
 
 var server = app.listen(3001, function() {
 	console.log(chalk.blue.bold('server started'));
 })
 
-models.User.sync({})
+models.User.sync()
 .then(function() {
-	return models.Page.sync({});
+	return models.Page.sync();
 })
 .then(function() {
 	server.listen(3001, function() {
