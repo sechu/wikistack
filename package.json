@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/sechu/wikistack#readme",
   "dependencies": {
+    "bluebird": "^3.3.5",
     "body-parser": "^1.15.0",
     "favicon": "0.0.2",
+    "marked": "^0.3.5",
     "morgan": "^1.7.0",
     "path": "^0.12.7",
     "pg": "^4.5.5",

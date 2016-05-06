@@ -1,13 +1,17 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <h3>{{title}}<small> (<a href="{{route}}/similar">Similar</a>)</small></h3>
-  <h4>by <a href="PLACEHOLDER-AUTHOR-URL">PLACEHOLDER AUTHOR NAME</a></h4>
-  <div>PLACEHOLDER TAG LIST</div>
+  <h3>{{title}}<small> (<a href="{{page.route}}/similar">Similar</a>)</small></h3>
+  <h4>by <a href="/users/{{page.authorId}}">{{page.author.name}}</a></h4>
+  <div>
+  	{% for tag in tags %}
+  	<a href= "/search/tag?tag={{tag}}">{{tag}}</a>
+  	{% endfor %}
+  </div>
   <hr/>
-  <div>PLACEHOLDER AUTHOR NAME WITH LINK TO AUTHOR PAGE</div>
-  <div class="page-body">{{content}}/div>
+  <div><a href="{{page.route}}">{{page.title}}</a></div>
+  <div class="page-body"><p>{% autoescape false %}{{page.renderedContent}}{% endautoescape %}</p></div>
   <hr/>
-  <a href="{{route}}/edit" class="btn btn-primary">edit this page</a>
-  <a href="{{route}}/delete" class="btn btn-danger">delete this page</a>
+  <a href="{{page.route}}/edit" class="btn btn-primary">edit this page</a>
+  <a href="{{page.route}}/delete" class="btn btn-danger">delete this page</a>
 {% endblock %}
